@@ -1,2 +1,1 @@
-# CathTheGoose
-Technical assignment for gamebox
+Имя, фамилия - Илья Молчанов
