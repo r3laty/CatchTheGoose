@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class GooseConfig : MonoBehaviour
 {
-    public GameObject Prefab; // Модель крота
-    public float SpawnInterval; // Время между спаунами
+    [Tooltip("Как корабль назовешь так он и поплывет")]
+    public string Name;
 }

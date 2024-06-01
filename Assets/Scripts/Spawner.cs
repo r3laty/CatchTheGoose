@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : GooseConfig
+public class Spawner : MonoBehaviour
 {
     public static event Action Caught;
 
@@ -12,9 +12,12 @@ public class Spawner : GooseConfig
     public float GameDuration;
     [Space]
     [SerializeField] private SpawnGrid spawnGrid;
+    [Space]
+    [SerializeField] private float spawnInterval;
+    [Space]
+    [SerializeField] private GooseConfig goose;
 
-    private List<GameObject> _spawnedObjects = new List<GameObject>();
-
+    private List<GooseConfig> _spawnedObjects = new List<GooseConfig>();
     private void Start()
     {
         IsGameStarted = true;
@@ -33,9 +36,12 @@ public class Spawner : GooseConfig
                 GameObject clickedObject = hit.collider.gameObject;
                 if (clickedObject.CompareTag("Finish"))
                 {
-                    Caught?.Invoke();
-                    _spawnedObjects.Remove(clickedObject);
-                    Destroy(clickedObject);
+                    if (clickedObject.TryGetComponent<GooseConfig>(out GooseConfig goose))
+                    {
+                        Caught?.Invoke();
+                        _spawnedObjects.Remove(goose);
+                        Pool.Instance.PoolDestroy(goose);
+                    }
                 }
             }
         }
@@ -51,20 +57,34 @@ public class Spawner : GooseConfig
 
                 Vector3 spawnPoint = transform.position + new Vector3(randomX * spawnGrid.cellSize, 0f, randomZ * spawnGrid.cellSize);
 
-                GameObject newGoose = Instantiate(Prefab, spawnPoint, Quaternion.identity);
+                GooseConfig newGoose = Pool.Instance.PoolInstatiate(goose, spawnPoint); //Instantiate(prefab, spawnPoint, Quaternion.identity);
 
                 _spawnedObjects.Add(newGoose);
 
                 if (_spawnedObjects.Count > 1)
                 {
                     int randomIndex = UnityEngine.Random.Range(0, _spawnedObjects.Count - 1);
-                    GameObject objectToRemove = _spawnedObjects[randomIndex];
+                    GooseConfig objectToRemove = _spawnedObjects[randomIndex];
                     _spawnedObjects.RemoveAt(randomIndex);
-                    Destroy(objectToRemove);
                 }
-                yield return new WaitForSeconds(SpawnInterval);
+                yield return new WaitForSeconds(spawnInterval);
             }
         }
+    }
+    private GooseConfig PoolInstatiate(GooseConfig objectToInstatiate, Vector3 spawnPoint)
+    {
+        GooseConfig goose = objectToInstatiate;
+        goose.gameObject.SetActive(true);
+        goose.transform.position = spawnPoint;
+
+        return goose;
+    }
+    private GooseConfig PoolDestroy(GooseConfig objectToRemove) 
+    {
+        GooseConfig goose = objectToRemove;
+        goose.gameObject.SetActive(false);
+
+        return goose; 
     }
 
 }
