@@ -9,7 +9,7 @@ public class TimerCounter : MonoBehaviour
     [Space]
     [SerializeField] private TextMeshProUGUI timerText;
     [Space]
-    //[SerializeField] private GameObject theEndMenu;
+    [SerializeField] private GameObject theEndMenu;
 
     private float _currentTime = 0;
     private int _currentGameMode;
@@ -43,10 +43,16 @@ public class TimerCounter : MonoBehaviour
             UpdateTimerText(timerText, _modeTextPattern);
             yield return null;
         }
+        TheEnd();
     }
     private void UpdateTimerText(TextMeshProUGUI tmpText, string textPattern)
     {
         tmpText.text = textPattern;
+    }
+    private void TheEnd()
+    {
+        theEndMenu.SetActive(true);
+        Time.timeScale = 0;
     }
     private void OnDisable()
     {

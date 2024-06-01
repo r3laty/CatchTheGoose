@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UiController : MonoBehaviour
 {
@@ -14,20 +13,30 @@ public class UiController : MonoBehaviour
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject choosingGameModeCanvas;
     [Space]
+    [SerializeField] private GameObject theEndMenu;
+    [Space]
     [SerializeField] private TimerCounter timer;
     public void GamemodeEasy()
     {
+        if (Time.timeScale != 1)
+        {
+            Time.timeScale = 1;
+        }
         LvlMode = 1;
 
         choosingGameModeCanvas.SetActive(false);
         easyModeLvl.SetActive(true);
         inGameMenuCanvas.SetActive(true);
-        
+
         StartCoroutine(timer.StartGame(LvlMode));
         Debug.Log("Easy");
     }
     public void GamemodeNormal()
     {
+        if (Time.timeScale != 1)
+        {
+            Time.timeScale = 1;
+        }
         LvlMode = 2;
 
         choosingGameModeCanvas.SetActive(false);
@@ -40,12 +49,16 @@ public class UiController : MonoBehaviour
 
     public void GamemodeHard()
     {
+        if (Time.timeScale != 1)
+        {
+            Time.timeScale = 1;
+        }
         LvlMode = 3;
 
         choosingGameModeCanvas.SetActive(false);
         hardModeLvl.SetActive(true);
         inGameMenuCanvas.SetActive(true);
-        
+
         StartCoroutine(timer.StartGame(LvlMode));
         Debug.Log("Hard");
     }
@@ -57,19 +70,15 @@ public class UiController : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-    public void LeaveToMainMenu()
+    public void TryAgain()
     {
         easyModeLvl.SetActive(false);
         normalModeLvl.SetActive(false);
         hardModeLvl.SetActive(false);
         inGameMenuCanvas.SetActive(false);
         choosingGameModeCanvas.SetActive(false);
+        theEndMenu.SetActive(false);
 
         mainMenuCanvas.SetActive(true);
-    }
-    public void TryAgain()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
     }
 }

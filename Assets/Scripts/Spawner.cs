@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
 
                 Vector3 spawnPoint = transform.position + new Vector3(randomX * spawnGrid.cellSize, 0f, randomZ * spawnGrid.cellSize);
 
-                GooseConfig newGoose = Pool.Instance.PoolInstatiate(goose, spawnPoint); //Instantiate(prefab, spawnPoint, Quaternion.identity);
+                GooseConfig newGoose = Pool.Instance.PoolInstatiate(goose, spawnPoint);
 
                 _spawnedObjects.Add(newGoose);
 
@@ -71,20 +71,4 @@ public class Spawner : MonoBehaviour
             }
         }
     }
-    private GooseConfig PoolInstatiate(GooseConfig objectToInstatiate, Vector3 spawnPoint)
-    {
-        GooseConfig goose = objectToInstatiate;
-        goose.gameObject.SetActive(true);
-        goose.transform.position = spawnPoint;
-
-        return goose;
-    }
-    private GooseConfig PoolDestroy(GooseConfig objectToRemove) 
-    {
-        GooseConfig goose = objectToRemove;
-        goose.gameObject.SetActive(false);
-
-        return goose; 
-    }
-
 }
