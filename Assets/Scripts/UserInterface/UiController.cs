@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class UiController : MonoBehaviour
 {
-    [HideInInspector] public bool Easy, Normal, Hard, GamemodeChosen;
     [HideInInspector] public int LvlMode;
 
     [SerializeField] private GameObject easyModeLvl;
