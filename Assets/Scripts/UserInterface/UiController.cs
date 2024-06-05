@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class UiController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UiController : MonoBehaviour
     [SerializeField] private GameObject hardModeLvl;
     [Space]
     [SerializeField] private GameObject inGameMenuCanvas;
+    [SerializeField] private GameObject staticInGameMenuCanvas;
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private GameObject choosingGameModeCanvas;
     [Space]
@@ -26,9 +28,10 @@ public class UiController : MonoBehaviour
         choosingGameModeCanvas.SetActive(false);
         easyModeLvl.SetActive(true);
         inGameMenuCanvas.SetActive(true);
+        staticInGameMenuCanvas.SetActive(true);
 
         StartCoroutine(timer.StartGame(LvlMode));
-        Debug.Log("Easy");
+        Debug.Log("Easy, Timescale " + Time.timeScale);
     }
     public void GamemodeNormal()
     {
@@ -41,9 +44,10 @@ public class UiController : MonoBehaviour
         choosingGameModeCanvas.SetActive(false);
         normalModeLvl.SetActive(true);
         inGameMenuCanvas.SetActive(true);
+        staticInGameMenuCanvas.SetActive(true);
 
         StartCoroutine(timer.StartGame(LvlMode));
-        Debug.Log("Medium");
+        Debug.Log("Medium, Time.timeScale" + Time.timeScale);
     }
 
     public void GamemodeHard()
@@ -57,9 +61,10 @@ public class UiController : MonoBehaviour
         choosingGameModeCanvas.SetActive(false);
         hardModeLvl.SetActive(true);
         inGameMenuCanvas.SetActive(true);
+        staticInGameMenuCanvas.SetActive(true);
 
         StartCoroutine(timer.StartGame(LvlMode));
-        Debug.Log("Hard");
+        Debug.Log("Hard, Timescale " + Time.timeScale);
     }
     public void Pause()
     {
@@ -77,6 +82,7 @@ public class UiController : MonoBehaviour
         inGameMenuCanvas.SetActive(false);
         choosingGameModeCanvas.SetActive(false);
         theEndMenu.SetActive(false);
+        staticInGameMenuCanvas.SetActive(false);
 
         mainMenuCanvas.SetActive(true);
     }
