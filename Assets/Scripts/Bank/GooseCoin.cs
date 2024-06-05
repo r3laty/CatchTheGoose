@@ -8,16 +8,29 @@ public class GooseCoin : MonoBehaviour
     private int _coinCount;
     private void OnEnable()
     {
+        print("Goose coin script on " + this.gameObject.name);
         Spawner.Caught += OnCatche;
     }
     private void OnCatche()
     {
         _coinCount++;
-        coinCountText.text = _coinCount.ToString();
+        UpdateCoinsText(_coinCount);
+    }
+    private void UpdateCoinsText(int amount)
+    {
+        coinCountText.text = amount.ToString();
+    }
+    public void AddToken(int amount)
+    {
+        _coinCount += amount;
+        UpdateCoinsText(_coinCount);
     }
     private void OnDisable()
     {
         _coinCount = 0;
-        Spawner.Caught += OnCatche;
+        UpdateCoinsText(_coinCount);
+
+        print("On disable (coin count " + _coinCount + ')');
+        Spawner.Caught -= OnCatche;
     }
 }
