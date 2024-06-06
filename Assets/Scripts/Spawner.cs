@@ -52,10 +52,10 @@ public class Spawner : MonoBehaviour
         {
             for (int z = 0; z < int.MaxValue; z++)
             {
-                int randomX = UnityEngine.Random.Range(0, spawnGrid.gridSize);
-                int randomZ = UnityEngine.Random.Range(0, spawnGrid.gridSize);
+                int randomX = UnityEngine.Random.Range(0, spawnGrid.GidSize);
+                int randomZ = UnityEngine.Random.Range(0, spawnGrid.GidSize);
 
-                Vector3 spawnPoint = transform.position + new Vector3(randomX * spawnGrid.cellSize, 0f, randomZ * spawnGrid.cellSize);
+                Vector3 spawnPoint = transform.position + new Vector3(randomX * spawnGrid.CellSize, 0f, randomZ * spawnGrid.CellSize);
 
                 GooseConfig newGoose = Pool.Instance.PoolInstatiate(goose, spawnPoint);
 

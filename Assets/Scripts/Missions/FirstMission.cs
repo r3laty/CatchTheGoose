@@ -1,11 +1,8 @@
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class FirstMission : MonoBehaviour, IMissionable
 {
-    [SerializeField] private string description = "Catch the goose";
-
     [SerializeField] private int needToEarn = 1;
     [SerializeField] private int reward = 100;
     [Space]
