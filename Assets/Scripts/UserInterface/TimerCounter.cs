@@ -18,8 +18,6 @@ public class TimerCounter : MonoBehaviour
     public IEnumerator StartGame(int currentGameMode)
     {
         _currentGameMode = currentGameMode - 1;
-        Debug.Log("Start game coroutine");
-
 
         _currentTime = spawners[_currentGameMode].GameDuration;
         StartCoroutine(spawners[_currentGameMode].SpawnGoosesWithDelay());

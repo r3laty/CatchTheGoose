@@ -9,7 +9,6 @@ public class Pool : MonoBehaviour
     }
     public GooseConfig PoolInstatiate(GooseConfig objectToInstatiate, Vector3 spawnPoint)
     {
-        Debug.Log("Pool instatiate");
         GooseConfig goose = objectToInstatiate;
         goose.gameObject.SetActive(true);
         goose.transform.position = spawnPoint;

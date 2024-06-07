@@ -31,7 +31,6 @@ public class UiController : MonoBehaviour
         staticInGameMenuCanvas.SetActive(true);
 
         StartCoroutine(timer.StartGame(LvlMode));
-        Debug.Log("Easy, Timescale " + Time.timeScale);
     }
     public void GamemodeNormal()
     {
@@ -47,7 +46,6 @@ public class UiController : MonoBehaviour
         staticInGameMenuCanvas.SetActive(true);
 
         StartCoroutine(timer.StartGame(LvlMode));
-        Debug.Log("Medium, Time.timeScale" + Time.timeScale);
     }
 
     public void GamemodeHard()
@@ -64,7 +62,6 @@ public class UiController : MonoBehaviour
         staticInGameMenuCanvas.SetActive(true);
 
         StartCoroutine(timer.StartGame(LvlMode));
-        Debug.Log("Hard, Timescale " + Time.timeScale);
     }
     public void Pause()
     {
@@ -85,5 +82,9 @@ public class UiController : MonoBehaviour
         staticInGameMenuCanvas.SetActive(false);
 
         mainMenuCanvas.SetActive(true);
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

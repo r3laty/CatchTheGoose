@@ -26,7 +26,6 @@ public class GoosesCounter : MonoBehaviour
         _count = 0;
         gooseCountText.text = "Gooses count: " + _count;
 
-        print("On disable (count " + _count + ')');
         Spawner.Caught -= OnCatche;
     }
 }
