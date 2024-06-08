@@ -3,17 +3,22 @@ using UnityEngine;
 
 public class GooseCoin : MonoBehaviour
 {
+    public int CoinAmount { get; private set; }
+    
+    [SerializeField] private int maxCoinCount;
     [SerializeField] private TextMeshProUGUI coinCountText;
-
-    private int _coinCount;
+    private void Start()
+    {
+        CoinAmount = maxCoinCount;
+    }
     private void OnEnable()
     {
         Spawner.Caught += OnCatche;
     }
     private void OnCatche()
     {
-        _coinCount++;
-        UpdateCoinsText(_coinCount);
+        CoinAmount++;
+        UpdateCoinsText(CoinAmount);
     }
     private void UpdateCoinsText(int amount)
     {
@@ -21,13 +26,18 @@ public class GooseCoin : MonoBehaviour
     }
     public void AddToken(int amount)
     {
-        _coinCount += amount;
-        UpdateCoinsText(_coinCount);
+        CoinAmount += amount;
+        UpdateCoinsText(CoinAmount);
+    }
+    public void SpendMoney(int amount)
+    {
+        CoinAmount -= amount;
+        UpdateCoinsText(CoinAmount);
     }
     private void OnDisable()
     {
-        _coinCount = 0;
-        UpdateCoinsText(_coinCount);
+        CoinAmount = 0;
+        UpdateCoinsText(CoinAmount);
 
         Spawner.Caught -= OnCatche;
     }

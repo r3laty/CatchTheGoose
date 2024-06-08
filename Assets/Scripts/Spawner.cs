@@ -6,23 +6,47 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public static event Action Caught;
+    public float GameDuration
+    {
+        get
+        {
+            return gameDuration;
+        }
+        private set
+        {
+            gameDuration = value;
+        }
+    }
+    public GooseConfig NewSkin
+    {
+        get
+        {
+            return goose;
+        }
+        set
+        {
+            goose = value;
+        }
+    }
 
-    [HideInInspector] public bool IsGameStarted;
-
-    public float GameDuration;
+    [SerializeField] private GooseConfig goose;
     [Space]
     [SerializeField] private SpawnGrid spawnGrid;
     [Space]
     [SerializeField] private float spawnInterval;
     [Space]
-    [SerializeField] private GooseConfig goose;
+    [SerializeField] private float gameDuration;
 
     private List<GooseConfig> _spawnedObjects = new List<GooseConfig>();
     private void Start()
     {
-        IsGameStarted = true;
-    }
+        GameDuration = gameDuration;
 
+        if (NewSkin != null)
+        {
+            goose = NewSkin;
+        }
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
